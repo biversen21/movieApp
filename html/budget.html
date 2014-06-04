@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Movie Production App</title>
+		<link rel='stylesheet' type='text/css' href='../stylesheets/bootstrap.css'>
+		<link rel='stylesheet' type='text/css' href='../stylesheets/styles.css'>
+	</head>
+	
+	<body>
+		<div class='header'>
+			<ul class'navbar'>
+				<li class='home'>
+					<a href='file:///Users\brianiversens\Desktop\Coding\MovieApp\index.html'>Home</a>
+				</li>
+				<li class='tasklist'>
+					<a href='file:///Users\brianiversens\Desktop\Coding\MovieApp\html\tasklist.html'>Tasklist</a>
+				</li>
+				<li class='budget'>
+					<a href='file:///Users\brianiversens\Desktop\Coding\MovieApp\html\budget.html' class='active'>Budget</a>
+				</li>
+				<li class='schedule'>
+					<a href='file:///Users\brianiversens\Desktop\Coding\MovieApp\html\schedule.html'>Schedule</a>
+				</li>
+				<li class='multimedia'>
+					<a href='file:///Users\brianiversens\Desktop\Coding\MovieApp\html\multimedia.html'>Multimedia</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div class='container'>
+			<h1>Budget Calculator</h1>
+		</div>
+		
+		<div class='separator'>
+		</div>
+		
+		<div class='estimate'>
+			<input type='text' id='budgetEst' placeholder='Estimated Budget' />
+			<button class='btn btn-primary' id='budgetSub'>Save</button>
+			<hr />
+		</div>
+			
+		
+		<div class='budgetList'>
+		</div>
+		<hr />
+		
+		<div class='footer'>
+			<ul>
+				<li>Created by: Brian Iversen</li>
+			</ul>
+		</div>
+		
+		<script type='text/template' id='production-budget-template'>
+			<table class='table striped'>
+				<thead>
+					<tr>
+						<th>Task ID</th>
+						<th>Description</th>
+						<th>Projected Budget</th>
+						<th>Actual Spend</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% _.each(budgetList, function(todo) { %>
+						<tr>
+							<td class="<%= todo.get('statusCheck') %>"><%= todo.get('taskID')%></td>
+							<td class="<%= todo.get('statusCheck') %>"><%= todo.get('description')%></td>
+							<td class="<%= todo.get('statusCheck') %>"><%= todo.get('budget')%></td>
+							<td><%= todo.get('actualSpend')%></td>
+						</tr>
+					<% }); %>
+				</thead>
+			</table>
+		</script>
+		
+	<script src='../js/jquery.js'></script>
+	<script src='../js/underscore.js'></script>
+	<script src='../js/backbone.js'></script>
+	<script src="../js/backbone.localStorage.js"></script>
+	<script src='../js/appBudget.js'></script>
+	</body>
+</html>
