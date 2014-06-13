@@ -102,7 +102,7 @@ var CompleteForm = Backbone.View.extend({
 	},
 	updateTodo: function(ev){
 		((this.todoItem.get('statusCheck')) == 'incomplete') ? 
-		this.todoItem.set({statusCheck: 'complete'}) : this.todoItem.set({statusCheck: 'incomplete'});
+			this.todoItem.set({statusCheck: 'complete'}) : this.todoItem.set({statusCheck: 'incomplete'});
 		var scheduleStartDate = this.todoItem.get('schedule').split('-');
 		var scheduleEndDate = $('#actualComplete').val().split('-');
 		var budgetDelta = $('#actualSpend').val() == 0 ? 0 : $('#actualSpend').val() - parseInt(this.todoItem.get('budget'));
@@ -138,6 +138,10 @@ var NewTodoForm = Backbone.View.extend({
 	events: {
 		'submit .edit-todo-form': 'saveTodo',
 		'click .delete': 'deleteTodo',
+		'click .cancel': 'cancelTodo'
+	},
+	cancelTodo: function(){
+		router.navigate('', {trigger: true});
 	},
 	deleteTodo: function(){
 		this.todoItem.destroy({

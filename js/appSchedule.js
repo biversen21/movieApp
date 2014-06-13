@@ -56,11 +56,7 @@ var router = new Router;
 // ***** Schedule Track Set *****
 
 var scheduleTrack = new ScheduleTrack({id: 1});
-scheduleTrack.fetch({
-	success: function(){
-		console.log(scheduleTrack.get('schedule'));
-	}
-});
+scheduleTrack.fetch();
 
 var scheduleTrackView = new ScheduleTrackView({model: scheduleTrack});
 scheduleTrackView.render();

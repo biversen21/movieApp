@@ -73,6 +73,7 @@
 				<input type='number' name='criticals' value="<%= todoItem ? todoItem.get('criticals') : '' %>" />
 				<hr />
 				<button type='submit' class='btn'><%= todoItem ? 'Update ' : 'Create ' %></button>
+				<button class='btn cancel'>Cancel</button>
 				<% if(todoItem) {%>
 					<input type='hidden' name='id' value='<%= todoItem.id %>'>
 					<input type='hidden' name='actualComplete' value='<%= todoItem.get("actualComplete") %>'>
