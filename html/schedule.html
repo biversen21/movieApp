@@ -2,27 +2,27 @@
 <html>
 	<head>
 		<title>Movie Production App</title>
-		<link rel='stylesheet' type='text/css' href='../stylesheets/styles.css'>
 		<link rel='stylesheet' type='text/css' href='../stylesheets/bootstrap.css'>
+		<link rel='stylesheet' type='text/css' href='../stylesheets/styles.css'>
 	</head>
 	
 	<body>
 		<div class='header'>
 			<ul class'navbar'>
 				<li class='home'>
-					<a href='file:///Users\brianiversens\Desktop\Coding\MovieApp\index.html'>Home</a>
+					<a href='file:///Users\brianiversen\Desktop\Coding\MovieApp\index.html'>Home</a>
 				</li>
 				<li class='tasklist'>
-					<a href='file:///Users\brianiversens\Desktop\Coding\MovieApp\html\tasklist.html'>Tasklist</a>
+					<a href='file:///Users\brianiversen\Desktop\Coding\MovieApp\html\tasklist.html'>Tasklist</a>
 				</li>
 				<li class='budget'>
-					<a href='file:///Users\brianiversens\Desktop\Coding\MovieApp\html\budget.html'>Budget</a>
+					<a href='file:///Users\brianiversen\Desktop\Coding\MovieApp\html\budget.html'>Budget</a>
 				</li>
 				<li class='schedule'>
-					<a href='file:///Users\brianiversens\Desktop\Coding\MovieApp\html\schedule.html' class='active'>Schedule</a>
+					<a href='file:///Users\brianiversen\Desktop\Coding\MovieApp\html\schedule.html' class='active'>Schedule</a>
 				</li>
 				<li class='multimedia'>
-					<a href='file:///Users\brianiversens\Desktop\Coding\MovieApp\html\multimedia.html'>Multimedia</a>
+					<a href='file:///Users\brianiversen\Desktop\Coding\MovieApp\html\multimedia.html'>Multimedia</a>
 				</li>
 			</ul>
 		</div>
@@ -34,14 +34,50 @@
 		<div class='separator'>
 		</div>
 		
-		<div class='footer'>
-			<ul>
-				<li class='creator'>Created by: Brian Iversen</li>
-			</ul>
+		<div class='estimate'>
+			<input type='text' id='scheduleEst' placeholder='Estimated Schedule' />
+			<button class='btn btn-primary' id='scheduleSub'>Save</button>
+			<hr />
 		</div>
+		
+		<div class='scheduleList'>
+		</div>
+		
+		<div class='separator'>
+		</div>
+		
+		<div class='scheduleDeltas'>
+		</div>
+		
+		<script type='text/template' id='schedule-template'>
+			<table class='table striped'>
+				<thead>
+					<tr>
+						<th>Task ID</th>
+						<th>Description</th>
+						<th>Projected Completion</th>
+						<th>Actual Completion</th>
+						<th>Delta Time</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% _.each(scheduleList, function(todo) { %>
+						<tr>
+							<td class="<%= todo.get('statusCheck') %>"><%= todo.get('taskID')%></td>
+							<td class="<%= todo.get('statusCheck') %>"><%= todo.get('description')%></td>
+							<td class="<%= todo.get('statusCheck') %>"><%= todo.get('schedule')%></td>
+							<td><%= todo.get('actualComplete')%></td>
+							<td><%= todo.get('diffDays')%> Days</td>
+						</tr>
+					<% }); %>
+				</thead>
+			</table>
+		</script>
 	
 	<script src='../js/jquery.js'></script>
 	<script src='../js/underscore.js'></script>
 	<script src='../js/backbone.js'></script>
+	<script src="../js/backbone.localStorage.js"></script>
+	<script src='../js/appSchedule.js'></script>
 	</body>
 </html>

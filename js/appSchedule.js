@@ -1,3 +1,78 @@
 $(function(){
-	
+
+var Router = Backbone.Router.extend({
+	routes: {
+		'': 'home',
+		'crit': 'criticalPath'
+	}
+});
+
+var ScheduleTrack = Backbone.Model.extend({
+	localStorage: new Backbone.LocalStorage("scheduleTrack")
+});
+
+var ScheduleList = Backbone.Collection.extend({
+	localStorage: new Backbone.LocalStorage("todoItems")
+});
+
+// ****** View Class ******
+
+var ScheduleTrackView = Backbone.View.extend({
+	el: '.scheduleDeltas',
+	render: function(){
+		var html = '<h3>Scheduled Completion: ' + this.model.get('schedule') + '</h3>';
+		this.$el.html(html);
+	}
+});
+
+var ScheduleListView = Backbone.View.extend({
+	el: '.scheduleList',
+	render: function(){
+		scheduleList = new ScheduleList();
+		var that = this;
+		scheduleList.fetch({
+			success: function(todoList){
+				var template = _.template($('#schedule-template').html(), {scheduleList: scheduleList.models});
+				that.$el.html(template);
+			}
+		});
+	}
+});
+
+// ***** Instances *****
+
+var scheduleListView = new ScheduleListView();
+var router = new Router;
+
+// ***** Schedule Track Set *****
+
+var scheduleTrack = new ScheduleTrack({id: 1});
+scheduleTrack.fetch({
+	success: function(){
+		console.log(scheduleTrack.get('schedule'));
+	}
+});
+
+var scheduleTrackView = new ScheduleTrackView({model: scheduleTrack});
+scheduleTrackView.render();
+
+var scheduleEstimate = 0;
+$('#scheduleSub').on('click', function(){
+	scheduleEstimate = $('#scheduleEst').val();
+	scheduleTrack.set({ schedule: scheduleEstimate });
+	scheduleTrack.save();
+});
+
+// ***** Router Set *****
+
+router.on('route:home', function(){
+	scheduleListView.render();
+});
+
+router.on('route:criticalPath', function(){
+	scheduleListView.render();
+});
+
+Backbone.history.start();
+
 });

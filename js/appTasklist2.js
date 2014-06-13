@@ -31,13 +31,32 @@ var TodoItem = Backbone.Model.extend({
 	defaults: {
 		statusCheck: 'incomplete',
 		actualSpend: 0,
-		actualComplete: ''
+		actualComplete: 'none',
+		diffDays: 0
 	}
 });
 
 var TodoList = Backbone.Collection.extend({
-	localStorage: new Backbone.LocalStorage("todoItems")
+	localStorage: new Backbone.LocalStorage("todoItems"),
+	sortAttribute: 'taskID',
+	sortDirection: 1,
+	sortTable: function(attr) {
+		this.sortAttribute = attr;
+		this.sort();
+	},
+	comparator: function(a, b) {
+		var a = parseInt(a.get(this.sortAttribute)),
+				b = parseInt(b.get(this.sortAttribute));
+		if (a == b) return 0;
+		if (this.sortDirection == 1) {
+			return a > b ? 1 : -1;
+		} else {
+			return a < b ? 1 : -1;
+		}
+	}
 });
+
+// ****** View setup ******
 
 var TodoListView = Backbone.View.extend({
 	el: '.page',
@@ -46,12 +65,16 @@ var TodoListView = Backbone.View.extend({
 		var that = this;
 		todoList.fetch({
 			success: function(todoList){
+				todoList.sortDirection = -1;
+				todoList.sortTable();
 				var template = _.template($('#todo-list-template').html(), {todoList: todoList.models});
 				that.$el.html(template);
 			}
 		});
 	}
 });
+
+// ****** Form templates ******
 
 var CompleteForm = Backbone.View.extend({
 	el: '.page',
@@ -69,11 +92,16 @@ var CompleteForm = Backbone.View.extend({
 		'submit .complete-list-form': 'updateTodo'
 	},
 	updateTodo: function(ev){
-		if ((this.todoItem.get('statusCheck')) == 'incomplete') {
-			this.todoItem.set({statusCheck: 'complete'});
-		} else {
-			this.todoItem.set({statusCheck: 'incomplete'});
-		}
+		((this.todoItem.get('statusCheck')) == 'incomplete') ? 
+			this.todoItem.set({statusCheck: 'complete'}) : this.todoItem.set({statusCheck: 'incomplete'});
+		var oneDay = 24* 60 * 60 * 1000;
+		var firstDate, secondDate, diffDay;
+		var scheduleStartDate = this.todoItem.get('schedule').split('-');
+		var scheduleEndDate = $('#actualComplete').val().split('-');
+		firstDate = new Date(scheduleStartDate[0], scheduleStartDate[1], scheduleStartDate[2]);
+		secondDate = new Date(scheduleEndDate[0], scheduleEndDate[1], scheduleEndDate[2]);
+		diffDay = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+		this.todoItem.set({ diffDays: diffDay });	
 		var todoDetails = $(ev.currentTarget).serializeObject();
 		this.todoItem.save(todoDetails, {
 			success: function(todoItem){
@@ -125,10 +153,14 @@ var NewTodoForm = Backbone.View.extend({
 	}
 });
 
+// ****** Instances ******
+
 var todoListView = new TodoListView();
 var newTodoForm = new NewTodoForm();
 var completeForm = new CompleteForm();
 var router = new Router; 
+
+// ****** Set Routes ******
 
 router.on('route:home', function(){
 	todoListView.render();

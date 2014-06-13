@@ -10,19 +10,19 @@
 		<div class='header'>
 			<ul class'navbar'>
 				<li class='home'>
-					<a href='file:///Users\brianiversens\Desktop\Coding\MovieApp\index.html'>Home</a>
+					<a href='file:///Users\brianiversen\Desktop\Coding\MovieApp\index.html'>Home</a>
 				</li>
 				<li class='tasklist'>
-					<a href='file:///Users\brianiversens\Desktop\Coding\MovieApp\html\tasklist.html' class='active'>Tasklist</a>
+					<a href='file:///Users\brianiversen\Desktop\Coding\MovieApp\html\tasklist.html' class='active'>Tasklist</a>
 				</li>
 				<li class='budget'>
-					<a href='file:///Users\brianiversens\Desktop\Coding\MovieApp\html\budget.html'>Budget</a>
+					<a href='file:///Users\brianiversen\Desktop\Coding\MovieApp\html\budget.html'>Budget</a>
 				</li>
 				<li class='schedule'>
-					<a href='file:///Users\brianiversens\Desktop\Coding\MovieApp\html\schedule.html'>Schedule</a>
+					<a href='file:///Users\brianiversen\Desktop\Coding\MovieApp\html\schedule.html'>Schedule</a>
 				</li>
 				<li class='multimedia'>
-					<a href='file:///Users\brianiversens\Desktop\Coding\MovieApp\html\multimedia.html'>Multimedia</a>
+					<a href='file:///Users\brianiversen\Desktop\Coding\MovieApp\html\multimedia.html'>Multimedia</a>
 				</li>
 			</ul>
 		</div>
@@ -37,10 +37,7 @@
 		<div class='page'>
 		</div>
 		
-		<div class='footer'>
-			<ul>
-				<li class='creator'>Created by: Brian Iversen</li>
-			</ul>
+		<div class='separator'>
 		</div>
 		
 		<script type='text/template' id='complete-list-template'>
@@ -49,11 +46,11 @@
 				<label>Scheduled Completion</label>
 				<label><%= todoItem.get('schedule') %></label>
 				<label>Actual Completion</label>
-				<input type='text' name='actualComplete' />
+				<input type='date' id='actualComplete' name='actualComplete' value="<%= todoItem.get('actualComplete') %>"/>
 				<label>Scheduled Budget</label>
 				<label><%= todoItem.get('budget') %></label>
 				<label>Actual Budget</label>
-				<input type='text' name='actualSpend' />
+				<input type='text' name='actualSpend' value="<%= todoItem.get('actualSpend') %>"/>
 				<hr />
 				<button type='submit' class='btn completed'><%= todoItem.get('statusCheck')!='complete' ? 'Complete' : 'Re-Open'%>
 			</form>
@@ -63,15 +60,15 @@
 			<form class='edit-todo-form'>
 				<legend><%= todoItem ? 'Update ' : 'Create ' %>User</legend>
 				<label>Task ID</label>
-				<input type='text' name='taskID' value="<%= todoItem ? todoItem.get('taskID') : '' %>" />
+				<input type='number' name='taskID' value="<%= todoItem ? todoItem.get('taskID') : '' %>" />
 				<label>Description</label>
 				<input type='text' name='description' value="<%= todoItem ? todoItem.get('description') : '' %>" />
 				<label>Owner</label>
 				<input type='text' name='owner' value="<%= todoItem ? todoItem.get('owner') : '' %>" />
 				<label>Schedule</label>
-				<input type='text' name='schedule' value="<%= todoItem ? todoItem.get('schedule') : '' %>" />
+				<input type='date' name='schedule' value="<%= todoItem ? todoItem.get('schedule') : '' %>" />
 				<label>Budget</label>
-				<input type='text' name='budget' value="<%= todoItem ? todoItem.get('budget') : '' %>" />
+				<input type='number' name='budget' value="<%= todoItem ? todoItem.get('budget') : '' %>" />
 				<hr />
 				<button type='submit' class='btn'><%= todoItem ? 'Update ' : 'Create ' %></button>
 				<% if(todoItem) {%>
@@ -79,6 +76,7 @@
 					<input type='hidden' name='actualComplete' value='<%= todoItem.get("actualComplete") %>'>
 					<input type='hidden' name='statusCheck' value='<%= todoItem.get("statusCheck") %>'>
 					<input type='hidden' name='actualSpend' value='<%= todoItem.get("actualSpend") %>'>
+					<input type='hidden' name='diffDays' value='<%= todoItem.get("diffDays") %>'>
 					<button class='btn btn-danger delete'>Delete</button>
 				<% }; %>
 			</form>
@@ -118,6 +116,7 @@
 	<script src='../js/underscore.js'></script>
 	<script src='../js/backbone.js'></script>
 	<script src="../js/backbone.localStorage.js"></script>
+	<script src='../js/validate.js'></script>
 	<script src='../js/appTaskList2.js'></script>
 	</body>
 </html>
