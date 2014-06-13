@@ -92,19 +92,22 @@ var CompleteForm = Backbone.View.extend({
 	events: {
 		'submit .complete-list-form': 'updateTodo'
 	},
-	updateTodo: function(ev){
-		((this.todoItem.get('statusCheck')) == 'incomplete') ? 
-			this.todoItem.set({statusCheck: 'complete'}) : this.todoItem.set({statusCheck: 'incomplete'});
+	dateDiff: function(scheduleStartDate, scheduleEndDate){
 		var oneDay = 24* 60 * 60 * 1000;
 		var firstDate, secondDate, diffDay;
+		firstDate = new Date(scheduleStartDate[0], scheduleStartDate[1], scheduleStartDate[2]);
+		secondDate = new Date(scheduleEndDate[0], scheduleEndDate[1], scheduleEndDate[2]);
+		diffDay = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+		return diffDay;
+	},
+	updateTodo: function(ev){
+		((this.todoItem.get('statusCheck')) == 'incomplete') ? 
+		this.todoItem.set({statusCheck: 'complete'}) : this.todoItem.set({statusCheck: 'incomplete'});
 		var scheduleStartDate = this.todoItem.get('schedule').split('-');
 		var scheduleEndDate = $('#actualComplete').val().split('-');
 		var budgetDelta = $('#actualSpend').val() == 0 ? 0 : $('#actualSpend').val() - parseInt(this.todoItem.get('budget'));
 		this.todoItem.set({budgetDelta: budgetDelta})
-		firstDate = new Date(scheduleStartDate[0], scheduleStartDate[1], scheduleStartDate[2]);
-		secondDate = new Date(scheduleEndDate[0], scheduleEndDate[1], scheduleEndDate[2]);
-		diffDay = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
-		this.todoItem.set({ diffDays: diffDay });	
+		this.todoItem.set({ diffDays: this.dateDiff(scheduleStartDate, scheduleEndDate) });	
 		var todoDetails = $(ev.currentTarget).serializeObject();
 		this.todoItem.save(todoDetails, {
 			success: function(todoItem){
