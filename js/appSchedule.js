@@ -39,8 +39,17 @@ var ScheduleListView = Backbone.View.extend({
 	}
 });
 
+var CriticalPathView = Backbone.View.extend({
+	el: '.scheduleList',
+	render: function(){
+		var template = '<h3>Test - Critical Path will go here</h3>';
+		this.$el.html(template);
+	}
+});
+
 // ***** Instances *****
 
+var criticalPathView = new CriticalPathView();
 var scheduleListView = new ScheduleListView();
 var router = new Router;
 
@@ -68,9 +77,8 @@ $('#scheduleSub').on('click', function(){
 router.on('route:home', function(){
 	scheduleListView.render();
 });
-
 router.on('route:criticalPath', function(){
-	scheduleListView.render();
+	criticalPathView.render();
 });
 
 Backbone.history.start();

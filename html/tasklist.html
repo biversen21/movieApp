@@ -50,7 +50,7 @@
 				<label>Scheduled Budget</label>
 				<label><%= todoItem.get('budget') %></label>
 				<label>Actual Budget</label>
-				<input type='text' name='actualSpend' value="<%= todoItem.get('actualSpend') %>"/>
+				<input type='text' name='actualSpend' id='actualSpend' value="<%= todoItem.get('actualSpend') %>"/>
 				<hr />
 				<button type='submit' class='btn completed'><%= todoItem.get('statusCheck')!='complete' ? 'Complete' : 'Re-Open'%>
 			</form>
@@ -69,6 +69,8 @@
 				<input type='date' name='schedule' value="<%= todoItem ? todoItem.get('schedule') : '' %>" />
 				<label>Budget</label>
 				<input type='number' name='budget' value="<%= todoItem ? todoItem.get('budget') : '' %>" />
+				<label>Task Dependencies (Link to TaskID)</label>
+				<input type='number' name='criticals' value="<%= todoItem ? todoItem.get('criticals') : '' %>" />
 				<hr />
 				<button type='submit' class='btn'><%= todoItem ? 'Update ' : 'Create ' %></button>
 				<% if(todoItem) {%>

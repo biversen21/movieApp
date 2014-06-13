@@ -35,7 +35,7 @@
 		</div>
 		
 		<div class='estimate'>
-			<input type='text' id='budgetEst' placeholder='Estimated Budget' />
+			<input type='number' id='budgetEst' placeholder='Estimated Budget' />
 			<button class='btn btn-primary' id='budgetSub'>Save</button>
 			<hr />
 		</div>
@@ -71,7 +71,7 @@
 							<td class="<%= todo.get('statusCheck') %>"><%= todo.get('description')%></td>
 							<td class="<%= todo.get('statusCheck') %>"><%= todo.get('budget')%></td>
 							<td><%= todo.get('actualSpend')%></td>
-							<td><%= todo.get('actualSpend') =='0' ? '0' : todo.get('actualSpend') - todo.get('budget') %>
+							<td><%= todo.get('budgetDelta')%></td>
 						</tr>
 					<% }); %>
 				</thead>

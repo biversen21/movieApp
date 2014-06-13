@@ -32,7 +32,8 @@ var TodoItem = Backbone.Model.extend({
 		statusCheck: 'incomplete',
 		actualSpend: 0,
 		actualComplete: 'none',
-		diffDays: 0
+		diffDays: 0,
+		budgetDelta: 0
 	}
 });
 
@@ -98,6 +99,8 @@ var CompleteForm = Backbone.View.extend({
 		var firstDate, secondDate, diffDay;
 		var scheduleStartDate = this.todoItem.get('schedule').split('-');
 		var scheduleEndDate = $('#actualComplete').val().split('-');
+		var budgetDelta = $('#actualSpend').val() == 0 ? 0 : $('#actualSpend').val() - parseInt(this.todoItem.get('budget'));
+		this.todoItem.set({budgetDelta: budgetDelta})
 		firstDate = new Date(scheduleStartDate[0], scheduleStartDate[1], scheduleStartDate[2]);
 		secondDate = new Date(scheduleEndDate[0], scheduleEndDate[1], scheduleEndDate[2]);
 		diffDay = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));

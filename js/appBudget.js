@@ -19,7 +19,6 @@ var BudgetList = Backbone.Collection.extend({
 var BudgetTrackView = Backbone.View.extend({
 	el: '.budgetDeltas',
 	render: function(){
-		Backbone.Validation.bind(this);
 		var html = '<h4>Total Estimate: $' + this.model.get('budget') + '</h4><h5>Remaining Projected Budget: $' + 
 		(this.model.get('budget')-totalProjected) +'</h5><h5>Remaining Actual Budget: $' + 
 		(this.model.get('budget')-totalActual) +'</h5';
@@ -37,7 +36,7 @@ var BudgetListView = Backbone.View.extend({
 				var template = _.template($('#production-budget-template').html(), {budgetList: budgetList.models});
 				that.$el.html(template);
 				var totalRow = "<tr id='totalRow'><td>" + "</td><td>" + "</td><td>Budgeted: $" + totalProjected + "</td><td>Actual: $" + 
-					totalActual + "</td><td>Delta: $" + totalDelta + "</td></tr>";
+					totalActual + "</td><td class='delta'>Delta: $" + totalDelta + "</td></tr>";
 				$('table', this.el).append(totalRow);
 				return this;
 			}
@@ -57,7 +56,7 @@ budgetLister.fetch({
 		_.each(budgetLister.toJSON(), function(budgetItem){
 			totalProjected += parseInt(budgetItem['budget']);
 			totalActual += parseInt(budgetItem['actualSpend']);
-			totalDelta += (parseInt(budgetItem['actualSpend']) == 0 ? 0 : (parseInt(budgetItem['actualSpend']) - parseInt(budgetItem['budget'])));
+			totalDelta += (parseInt(budgetItem['budgetDelta'] == 0 ? 0 : parseInt(budgetItem['budgetDelta'])));
 		});
 	}
 });
@@ -69,11 +68,7 @@ var router = new Router;
 // ***** Budget set ***** 
 
 var budgetTrack = new BudgetTrack({id: 1});
-budgetTrack.fetch({
-	success: function(){
-		console.log(budgetTrack.get('budget'));
-	}
-});
+budgetTrack.fetch({});
 
 var budgetTrackView = new BudgetTrackView({model: budgetTrack});
 budgetTrackView.render();

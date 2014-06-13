@@ -5,6 +5,14 @@ img {
 	height: 40px;
 }
 
+.delta {
+	color: red;
+}
+
+.posDelta {
+	color: green;
+}
+
 #totalRow {
 	border: 2px solid black;
 }
