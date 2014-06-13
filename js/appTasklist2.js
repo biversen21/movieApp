@@ -90,7 +90,11 @@ var CompleteForm = Backbone.View.extend({
 		});
 	},
 	events: {
-		'submit .complete-list-form': 'updateTodo'
+		'submit .complete-list-form': 'updateTodo',
+		'click .cancel': 'cancelTodo'
+	},
+	cancelTodo: function(){
+		router.navigate('', {trigger: true});
 	},
 	dateDiff: function(scheduleStartDate, scheduleEndDate){
 		var oneDay = 24* 60 * 60 * 1000;

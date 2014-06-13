@@ -42,8 +42,14 @@ var ScheduleListView = Backbone.View.extend({
 var CriticalPathView = Backbone.View.extend({
 	el: '.scheduleList',
 	render: function(){
-		var template = '<h3>Test - Critical Path will go here</h3>';
-		this.$el.html(template);
+		criticalList = new ScheduleList();
+		var that = this;
+		criticalList.fetch({
+			success: function(todoList){
+				var template = '<h3>Test - Critical Path will go here</h3>';
+				that.$el.html(template);
+			}
+		});
 	}
 });
 
