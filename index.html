@@ -34,22 +34,34 @@
 		<div class='separator'>
 		</div>
 		
-		<div class='loginInputs existing'>
-			<form>
-				<legend>User Login</legend>
-				<label>User Name</label>
-				<input type='text' name='userName' />
-				<label>Password</label>
-				<input type='text' name='password' />
-				<hr />
-				<button class='btn'>Login</button>
-				<hr />
-			</form>
+		<div class='page'>
+			<h3>Inner</h3>
 		</div>
 		
-		<div class='loginInputs newUser'>
-			<form>
-				<legend>New User Sign-Up</legend>
+		<script type='text/template' id='sign-in-template'>
+			<div class='loginInputs existing'>
+				<form>
+					<legend>User Login</legend>
+					<label>User Name</label>
+					<input type='text' name='userName' />
+					<label>Password</label>
+					<input type='password' name='password' />
+					<hr />
+					<button class='btn'>Login</button>
+					<hr />
+				</form>
+			</div>		
+			<div class='loginInputs newUser'>
+				<form>
+					<legend>New User Sign-Up</legend>
+					<button href='#/new' class='btn btn-primary' id='newUser'>New User</button>
+					<hr />
+				</form>
+			</div>
+		</script>
+				
+		<script type='text/template' id='new-user-template'>
+			<form class='new-user-form'>
 				<label>First Name</label>
 				<input type='text' name='firstName' />
 				<label>Last Name</label>
@@ -57,13 +69,13 @@
 				<label>E-Mail Address</label>
 				<input type='text' name-'email' />
 				<hr />
-				<button class='btn'>New User</button>
-				<hr />
 			</form>
-		</div>
+		</script>
 		
 	<script src='js/jquery.js'></script>
 	<script src='js/underscore.js'></script>
 	<script src='js/backbone.js'></script>
+	<script src="js/backbone.localStorage.js"></script>
+	<script src='js/index.js'></script>
 	</body>
 </html>
