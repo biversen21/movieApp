@@ -36,7 +36,7 @@ var BudgetTrackView = Backbone.View.extend({
 	el: '.budgetDeltas',
 	render: function(){
 		var html = '<h4>Total Estimate: $' + this.model.get('budget') + '</h4><h5>Remaining Projected Budget: $' + 
-		(this.model.get('budget')-totalProjected) +'</h5><h5>Remaining Actual Budget: $' + 
+		(this.model.get('budget')-totalProjected) + '</h5><h5>Remaining Actual Budget: $' + 
 		(this.model.get('budget')-totalActual) +'</h5';
 		this.$el.html(html);
 	}
@@ -51,8 +51,8 @@ var BudgetListView = Backbone.View.extend({
 			success: function(todoList){
 				var template = _.template($('#production-budget-template').html(), {budgetList: budgetList.models});
 				that.$el.html(template);
-				var totalRow = "<tr id='totalRow'><td>" + "</td><td>" + "</td><td>Budgeted: $" + totalProjected + "</td><td>Actual: $" + 
-					totalActual + "</td><td class='delta'>Delta: $" + totalDelta + "</td></tr>";
+				var totalRow = "<tr id='totalRow'><td>" + "</td><td>" + "</td><td>Budgeted: $" + totalProjected + 
+				"</td><td>Actual: $" + totalActual + "</td><td class='delta'>Delta: $" + totalDelta + "</td></tr>";
 				$('table', this.el).append(totalRow);
 				return this;
 			}

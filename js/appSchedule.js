@@ -13,15 +13,15 @@ var ScheduleTrack = Backbone.Model.extend({
 
 var ScheduleList = Backbone.Collection.extend({
 	localStorage: new Backbone.LocalStorage("todoItems"),
-	sortAttribute: 'taskID',
+	sortAttribute: 'schedule',
 	sortDirection: 1,
 	sortTable: function(attr) {
 		this.sortAttribute = attr;
 		this.sort();
 	},
 	comparator: function(a, b) {
-		var a = parseInt(a.get(this.sortAttribute)),
-				b = parseInt(b.get(this.sortAttribute));
+		var a = a.get(this.sortAttribute),
+				b = b.get(this.sortAttribute);
 		if (a == b) return 0;
 		if (this.sortDirection == 1) {
 			return a > b ? 1 : -1;

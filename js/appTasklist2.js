@@ -111,7 +111,7 @@ var CompleteForm = Backbone.View.extend({
 		var scheduleEndDate = $('#actualComplete').val().split('-');
 		var budgetDelta = $('#actualSpend').val() == 0 ? 0 : $('#actualSpend').val() - parseInt(this.todoItem.get('budget'));
 		this.todoItem.set({budgetDelta: budgetDelta})
-		this.todoItem.set({ diffDays: this.dateDiff(scheduleStartDate, scheduleEndDate) });	
+		this.todoItem.set({diffDays: this.dateDiff(scheduleStartDate, scheduleEndDate) });	
 		var todoDetails = $(ev.currentTarget).serializeObject();
 		this.todoItem.save(todoDetails, {
 			success: function(todoItem){
