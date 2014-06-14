@@ -12,7 +12,23 @@ var ScheduleTrack = Backbone.Model.extend({
 });
 
 var ScheduleList = Backbone.Collection.extend({
-	localStorage: new Backbone.LocalStorage("todoItems")
+	localStorage: new Backbone.LocalStorage("todoItems"),
+	sortAttribute: 'taskID',
+	sortDirection: 1,
+	sortTable: function(attr) {
+		this.sortAttribute = attr;
+		this.sort();
+	},
+	comparator: function(a, b) {
+		var a = parseInt(a.get(this.sortAttribute)),
+				b = parseInt(b.get(this.sortAttribute));
+		if (a == b) return 0;
+		if (this.sortDirection == 1) {
+			return a > b ? 1 : -1;
+		} else {
+			return a < b ? 1 : -1;
+		}
+	}
 });
 
 // ****** View Class ******
