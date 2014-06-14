@@ -16,11 +16,10 @@ var UserList = Backbone.Collection.extend ({
 });
 
 var HomeView = Backbone.View.extend ({
-	el: 'page',
+	el: '.page',
 	render: function(){
-		var template = _.template($('#sign-in-template').html());//, {userProfile: userProfile.models});
-		this.$el.html('<h3>Test</h3>');
-		console.log(template);
+		var template = _.template($('#sign-in-template').html());
+		this.$el.html(template);
 	}
 })
 
