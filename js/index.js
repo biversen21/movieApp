@@ -21,7 +21,15 @@ var HomeView = Backbone.View.extend ({
 		var template = _.template($('#sign-in-template').html());
 		this.$el.html(template);
 	}
-})
+});
+
+var NewUserView = Backbone.View.extend({
+	el: '.page',
+	render: function(){
+		var template = _.template($('#new-user-template').html());
+		this.$el.html(template);
+	}
+});
 
 var UserView = Backbone.View.extend ({
 	render: function(){
@@ -35,16 +43,16 @@ var UserView = Backbone.View.extend ({
 	}
 });
 
+var newUserView = new NewUserView();
 var homeView = new HomeView();
 var userView = new UserView();
 var router = new Router;
 	
 router.on('route:home', function(){
 	homeView.render();
-	console.log('test');
 });
-router.on('route:editProfile', function() {
-	userView.render();
+router.on('route:editProfile', function(){
+	newUserView.render();
 });
 
 Backbone.history.start();
