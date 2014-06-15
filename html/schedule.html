@@ -34,23 +34,47 @@
 		<div class='separator'>
 		</div>
 		
-		<div class='estimate'>
-			<label>Estimated Completion</label>
-			<input type='date' id='scheduleEst' />
-			<button class='btn btn-primary' id='scheduleSub'>Save</button>
-			<hr />
-		</div>
-		
 		<div class='scheduleList'>
 		</div>
 		
 		<div class='separator'>
 		</div>
 		
-		<div class='scheduleDeltas'>
-		</div>
+		<script type='text/template' id='critical-template'>
+			<table class='table striped'>
+				<thead>
+					<tr>
+						<th>Task ID</th>
+						<th>Description</th>
+						<th>Dependencies</th>
+						<th>Projected Completion</th>
+						<th>Actual Completion</th>
+						<th>Delta Time</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% _.each(criticalList, function(todo) { %>
+						<tr>
+							<td class="<%= todo.get('statusCheck') %>"><%= todo.get('taskID')%></td>
+							<td class="<%= todo.get('statusCheck') %>"><%= todo.get('description')%></td>
+							<td class="<%= todo.get('statusCheck') %>"><%= todo.get('criticals')%></td>
+							<td class="<%= todo.get('statusCheck') %>"><%= todo.get('schedule')%></td>
+							<td><%= todo.get('actualComplete')%></td>
+							<td><%= todo.get('diffDays')%> Days</td>
+						</tr>
+					<% }); %>
+				</thead>
+			</table>
+				<button class='btn back' >Go Back</button>
+		</script>
 		
 		<script type='text/template' id='schedule-template'>
+			<div class='estimate'>
+				<label>Estimated Completion</label>
+				<input type='date' id='scheduleEst' />
+				<button class='btn btn-primary' id='scheduleSub'>Save</button>
+				<hr />
+			</div>
 			<a href='#/crit' class='btn btn-primary' id='criticalTask'>Critical Task Path</a>
 			<hr />
 			<table class='table striped'>

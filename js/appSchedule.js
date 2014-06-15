@@ -62,10 +62,16 @@ var CriticalPathView = Backbone.View.extend({
 		var that = this;
 		criticalList.fetch({
 			success: function(todoList){
-				var template = '<h3>Test - Critical Path will go here</h3>';
+				var template = _.template($('#critical-template').html(), {criticalList: criticalList.models});
 				that.$el.html(template);
 			}
 		});
+	},
+	events: {
+		'click .back': 'returnSched'
+	},
+	returnSched: function(){
+		router.navigate('', {trigger: true});
 	}
 });
 
