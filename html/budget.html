@@ -81,6 +81,12 @@
 			</table>
 		</script>
 		
+		<script type='text/template' id='budget-track-template'>
+			<h4>Total Estimate: $<%= model.get('budget') %></h4>
+			<h5>Remaining Projected Budget: $<%= (model.get('budget')-totalProjected) %></h5>
+			<h5>Remaining Actual Budget: $<%= (model.get('budget')-totalActual) >%</h5>;
+		</script>
+		
 	<script src='../js/jquery.js'></script>
 	<script src='../js/underscore.js'></script>
 	<script src='../js/backbone.js'></script>

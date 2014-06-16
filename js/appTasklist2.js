@@ -75,7 +75,7 @@ var TodoListView = Backbone.View.extend({
 	}
 });
 
-// ****** Form templates ******
+// ****** Form Views ******
 
 var CompleteForm = Backbone.View.extend({
 	el: '.page',
