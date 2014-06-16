@@ -107,7 +107,7 @@
 							<td class="<%= todo.get('statusCheck') %>" ><%= todo.get('description')%></td>
 							<td class="<%= todo.get('statusCheck') %>" ><%= todo.get('owner')%></td>
 							<td class="<%= todo.get('statusCheck') %>" ><%= todo.get('schedule')%></td>
-							<td class="<%= todo.get('statusCheck') %>" ><%= todo.get('budget')%></td>
+							<td class="<%= todo.get('statusCheck') %>" >$<%= todo.get('budget')%></td>
 							<td><a href='#edit/<%= todo.id %>' class='btn'>Edit</a>
 							<a href='#complete/<%= todo.id %>' class='btn'><%= todo.get('statusCheck')!='complete' ? 'Complete' : 'Re-Open' %></a></td>
 						</tr>

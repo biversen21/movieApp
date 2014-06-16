@@ -1,5 +1,6 @@
 $(function() {
 	
+	//Helper function to serialize data	
 $.fn.serializeObject = function() {
 	var o = {};
 	var a = this.serializeArray();
@@ -31,6 +32,8 @@ var UserProfile = Backbone.Model.extend ({
 var UserList = Backbone.Collection.extend ({
 	localStorage: new Backbone.LocalStorage('users')
 });
+
+//****** View Class ******
 
 var HomeView = Backbone.View.extend ({
 	el: '.page',
@@ -65,18 +68,6 @@ var NewUserView = Backbone.View.extend({
 	}
 });
 
-var UserView = Backbone.View.extend ({
-	render: function(){
-		var that = this; 
-		userProfile = new UserProfile();
-		userProfile.fetch({
-			success: function(){
-				console.log('Test');
-			}
-		})
-	}
-});
-
 var WelcomeView = Backbone.View.extend({
 	el: '.page',
 	render: function(){
@@ -85,10 +76,14 @@ var WelcomeView = Backbone.View.extend({
 	}
 });
 
+//****** Instances ******
+
 var welcomeView = new WelcomeView();
 var newUserView = new NewUserView();
 var homeView = new HomeView();
-var userView = new UserView();
+
+//****** Router setup ******
+
 var router = new Router;
 	
 router.on('route:home', function(){
