@@ -52,6 +52,16 @@ var ScheduleListView = Backbone.View.extend({
 				that.$el.html(template);
 			}
 		});
+	},
+	events: {
+		'click #scheduleSub': 'saveEst'
+	},
+	saveEst: function(){
+		var scheduleTrack = new ScheduleTrack({id: 1});
+		scheduleTrack.fetch();
+		var scheduleEstimate = $('#scheduleEst').val();
+		scheduleTrack.set({ schedule: scheduleEstimate });
+		scheduleTrack.save();
 	}
 });
 
@@ -90,11 +100,6 @@ var scheduleTrackView = new ScheduleTrackView({model: scheduleTrack});
 scheduleTrackView.render();
 
 var scheduleEstimate = 0;
-$('#scheduleSub').on('click', function(){
-	scheduleEstimate = $('#scheduleEst').val();
-	scheduleTrack.set({ schedule: scheduleEstimate });
-	scheduleTrack.save();
-});
 
 // ***** Router Set *****
 

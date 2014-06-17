@@ -98,6 +98,7 @@ budgetLister.fetch({
 		});
 	}
 });
+
 // ***** Instances *****
 
 var budgetEstimator = new BudgetEstimator();
@@ -111,6 +112,7 @@ var budgetTrackView = new BudgetTrackView({model: budgetTrack});
 
 
 // ***** Router set *****
+
 router.on('route:home', function (){
 	budgetEstimator.render();
 	budgetTrackView.render();
