@@ -2,7 +2,8 @@ $(function() {
 	
 var Router = Backbone.Router.extend({
 	routes: {
-		'': 'home'
+		'': 'home',
+		'crit': 'criticalPath'
 	}
 });
 
@@ -60,6 +61,13 @@ var BudgetListView = Backbone.View.extend({
 	}
 });
 
+var CriticalBudgetView = Backbone.View.extend({
+	el: '.budgetList',
+	render: function(){
+		
+	}
+});
+
 var BudgetEstimator = Backbone.View.extend({
 	el: '.estimate',
 	render: function(){
@@ -103,6 +111,7 @@ budgetLister.fetch({
 
 var budgetEstimator = new BudgetEstimator();
 var budgetListView = new BudgetListView();
+var criticalBudgetView = new CriticalBudgetView();
 var router = new Router;
 
 var budgetTrack = new BudgetTrack({id: 1});
@@ -110,13 +119,15 @@ budgetTrack.fetch({});
 
 var budgetTrackView = new BudgetTrackView({model: budgetTrack});
 
-
 // ***** Router set *****
 
 router.on('route:home', function (){
 	budgetEstimator.render();
 	budgetTrackView.render();
 	budgetListView.render();
+});
+router.on('route:criticalPath', function(){
+	criticalBudgetView.render();
 });
 	
 Backbone.history.start();
