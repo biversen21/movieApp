@@ -1,5 +1,13 @@
 $(function() {
 	
+//****** Variables ******
+
+var totalActual = 0;
+var totalDelta = 0;
+var totalProjected = 0;
+
+//****** Backbone ******
+	
 var Router = Backbone.Router.extend({
 	routes: {
 		'': 'home',
@@ -91,10 +99,6 @@ var BudgetEstimator = Backbone.View.extend({
 });
 
 // ****** Iterator *****
-
-var totalActual = 0;
-var totalDelta = 0;
-var totalProjected = 0;
 
 var budgetLister = new BudgetList();
 budgetLister.fetch({

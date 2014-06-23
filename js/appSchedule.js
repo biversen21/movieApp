@@ -1,4 +1,10 @@
 $(function(){
+	
+//****** Variables ******
+
+var scheduleEstimate = 0;
+
+//****** Backbone ******
 
 var Router = Backbone.Router.extend({
 	routes: {
@@ -92,8 +98,6 @@ scheduleTrack.fetch();
 
 var scheduleTrackView = new ScheduleTrackView({model: scheduleTrack});
 scheduleTrackView.render();
-
-var scheduleEstimate = 0;
 
 // ***** Router Set *****
 

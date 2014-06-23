@@ -91,10 +91,9 @@ var welcomeView = new WelcomeView();
 var newUserView = new NewUserView();
 var homeView = new HomeView();
 var profileView = new ProfileView();
+var router = new Router;
 
 //****** Router setup ******
-
-var router = new Router;
 	
 router.on('route:home', function(){
 	homeView.render();
