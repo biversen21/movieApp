@@ -53,7 +53,7 @@
 				<input type='text' name='actualSpend' id='actualSpend' value="<%= todoItem.get('actualSpend') %>"/>
 				<hr />
 				<button type='submit' class='btn completed'><%= todoItem.get('statusCheck')!='complete' ? 'Complete' : 'Re-Open'%>
-				<button class='btn cancel'>Cancel</button>
+				<a href='' class='btn cancel'>Cancel</a>
 			</form>
 		</script>
 		
@@ -74,7 +74,7 @@
 				<input type='number' name='criticals' value="<%= todoItem ? todoItem.get('criticals') : '' %>" />
 				<hr />
 				<button type='submit' class='btn'><%= todoItem ? 'Update ' : 'Create ' %></button>
-				<button class='btn cancel'>Cancel</button>
+				<a href='' class='btn cancel'>Cancel</a>
 				<% if(todoItem) {%>
 					<input type='hidden' name='id' value='<%= todoItem.id %>'>
 					<input type='hidden' name='actualComplete' value='<%= todoItem.get("actualComplete") %>'>

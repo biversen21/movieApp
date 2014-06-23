@@ -76,12 +76,6 @@ var CriticalPathView = Backbone.View.extend({
 				that.$el.html(template);
 			}
 		});
-	},
-	events: {
-		'click .back': 'returnSched'
-	},
-	returnSched: function(){
-		router.navigate('', {trigger: true});
 	}
 });
 

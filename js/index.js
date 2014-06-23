@@ -21,7 +21,8 @@ var Router = Backbone.Router.extend ({
 	routes: {
 		'': 'home',
 		'new': 'editProfile',
-		'welcome': 'welcomeUser'
+		'welcome': 'welcomeUser',
+		'profile': 'profileView'
 	}
 }); 
 
@@ -68,6 +69,14 @@ var NewUserView = Backbone.View.extend({
 	}
 });
 
+var ProfileView = Backbone.View.extend({
+	el: '.page',
+	render: function(){
+		var template = _.template($('#profile-view-template').html());
+		this.$el.html(template);
+	}
+});
+
 var WelcomeView = Backbone.View.extend({
 	el: '.page',
 	render: function(){
@@ -81,6 +90,7 @@ var WelcomeView = Backbone.View.extend({
 var welcomeView = new WelcomeView();
 var newUserView = new NewUserView();
 var homeView = new HomeView();
+var profileView = new ProfileView();
 
 //****** Router setup ******
 
@@ -94,6 +104,9 @@ router.on('route:editProfile', function(){
 });
 router.on('route:welcomeUser', function(){
 	welcomeView.render();
+});
+router.on('route:profileView', function(){
+	profileView.render();
 });
 
 Backbone.history.start();
