@@ -10,7 +10,7 @@
 		<div class='header'>
 			<ul class'navbar'>
 				<li class='home'>
-					<a href='index.html' class='active'>Home</a>
+					<a href='index.php' class='active'>Home</a>
 				</li>
 				<li class='tasklist'>
 					<a href='/html/tasklist.html'>Tasklist</a>
